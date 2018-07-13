@@ -1,6 +1,6 @@
 module.exports = function( dialogflowMiddleware,controller) {
 
-    controller.hears('smalltalk.*', "direct_message,direct_mention",dialogflowMiddleware.hears,  function(
+    controller.hears('smalltalk.(.*)', "direct_message,direct_mention",dialogflowMiddleware.hears,  function(
         bot,
         message
     ) {
