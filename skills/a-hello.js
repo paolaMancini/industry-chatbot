@@ -5,7 +5,7 @@ module.exports = function( dialogflowMiddleware,controller) {
         message
     ) {
         console.log('MESSAGE:', message);
-        console.log('fulfillment:', message.fulfillment);
-        bot.reply(message, 'Ciao!');
+        console.log('fulfillment:', message.fulfillment.speech);
+        bot.reply(message, message.fulfillment.speech);
     });
 }
