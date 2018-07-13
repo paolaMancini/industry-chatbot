@@ -1,0 +1,24 @@
+{
+    "name": "industry-chatbot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bot.js",
+    "scripts": {
+        "test": "node boot.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paolaMancini/industry-chatbot.git"
+    },
+    "author": "Paola Mancini",
+    "license": "MIT",
+    "dependencies": {
+        "botkit": "0.6.0",
+        "botkit-middleware-dialogflow": "^1.4.1",
+        "node-env-file": "0.1.8"
+    },
+    "bugs": {
+        "url": "https://github.com/paolaMancini/industry-chatbot/issues"
+    },
+    "homepage": "https://github.com/paolaMancini/industry-chatbot#readme"
+}
