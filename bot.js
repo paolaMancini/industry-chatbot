@@ -61,6 +61,7 @@ var options = {
     token: dialogflow
 };
 var dialogflowMiddleware = require('botkit-middleware-dialogflow')(options);
+console.log('dialogflowMiddleware: ',dialogflowMiddleware);
 
 //
 // Create bot
