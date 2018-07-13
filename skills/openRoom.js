@@ -6,12 +6,13 @@ module.exports = function(dialogflowMiddleware,controller) {
     controller.hears(['openRoom',/open (.*)/i], 'direct_message,direct_mention', dialogflowMiddleware.hears,function(bot, message) {
             console.log('message: ', message);
 
-            console.log(message.match[0]);
-            console.log(message.match[1]);
+           // console.log(message.match[0]);
+           // console.log(message.match[1]);
             //var roomName = "digitaliani";
             //var roomName = message.match[1];
             
-            var roomName=message.parameters.lockName;
+            //var roomName=message.parameters.lockName;
+        var roomName=message.entities.lockName;
             var italtelRoom = "Office 301";
             var ciscoRoom = "Digitaliani";
 
