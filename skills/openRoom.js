@@ -9,7 +9,9 @@ module.exports = function(dialogflowMiddleware,controller) {
             console.log(message.match[0]);
             console.log(message.match[1]);
             //var roomName = "digitaliani";
-            var roomName = message.match[1];
+            //var roomName = message.match[1];
+            
+            var roomName=message.parameters.lockName;
             var italtelRoom = "Office 301";
             var ciscoRoom = "Digitaliani";
 
