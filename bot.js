@@ -61,7 +61,7 @@ var options = {
     token: dialogflow
 };
 var dialogflowMiddleware = require('botkit-middleware-dialogflow')(options);
-controller.middleware.receive.use(dialogflowMiddleware.receive);
+
 //
 // Create bot
 //
@@ -79,7 +79,7 @@ var controller = Botkit.sparkbot({
 
 
 var bot = controller.spawn({});
-
+controller.middleware.receive.use(dialogflowMiddleware.receive);
 
 //
 // Launch bot
