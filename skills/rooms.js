@@ -3,7 +3,7 @@ var JagoCalls = require("./JagoAPIsCalls");
 
 module.exports = function( dialogflowMiddleware,controller) {
 
-    controller.hears([/lock/i], 'direct_message,direct_mention', dialogflowMiddleware.hears,function(bot, message) {
+    controller.hears(['getLocks',/lock/i], 'direct_message,direct_mention', dialogflowMiddleware.hears,function(bot, message) {
         console.log('message: ', message);
  
         
