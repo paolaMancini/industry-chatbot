@@ -1,5 +1,5 @@
 module.exports = function(controller) {
-    controller.hears('Default Welcome Intent', 'message_received', dialogflowMiddleware.hears, function(bot, message {
+    controller.hears(['input.welcome'], 'message_received', dialogflowMiddleware.action, function(bot, message {
             console.log('MESSAGE:', message);
             bot.reply(message, 'Hello!');
         }); console.log('message: ', message); console.log('message.data.personEmail: ', message.data.personEmail);
