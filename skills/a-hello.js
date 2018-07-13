@@ -1,4 +1,4 @@
-module.exports = function( controller) {
+module.exports = function( dialogflowMiddleware,controller) {
 
     controller.hears('Default Welcome Intent', "direct_message,direct_mention",  function(
     //controller.hears(['aboutMe', /^sorry.*/i], "direct_message,direct_mention",   function(
