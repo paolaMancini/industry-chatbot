@@ -1,6 +1,6 @@
 module.exports = function(controller) {
 
-    controller.hears(['input.welcome'], 'direct_message', dialogflowMiddleware.hears, function(
+    controller.hears(['input.welcome'], 'direct_message', dialogflowMiddleware.action, function(
         bot,
         message
     ) {
