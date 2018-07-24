@@ -18,7 +18,8 @@ module.exports = function(dialogflowMiddleware,controller) {
 
             if ((roomName.toLowerCase().trim() != (ciscoRoom.toLowerCase()).trim()) && (roomName.toLowerCase().trim() != (italtelRoom.toLowerCase()).trim())) {
                 if ((roomName == null) || (roomName === "") ){
-                    bot.reply(message, "room name not specified");
+                    //bot.reply(message, "room name not specified");
+                    bot.reply(message, message.fulfillment.speech);
                 }else{
                     bot.reply(message, "Room " + roomName + " not available");
                 }
