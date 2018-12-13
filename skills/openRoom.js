@@ -12,7 +12,7 @@ module.exports = function(dialogflowMiddleware,controller) {
             //var roomName = message.match[1];
             
             //var roomName=message.parameters.lockName;
-        var roomName=message.entities.lockName;
+            var roomName=message.entities.lockName;
             var italtelRoom = "Office 301";
             var ciscoRoom = "Digitaliani";
 
@@ -33,53 +33,29 @@ module.exports = function(dialogflowMiddleware,controller) {
                 var user = "u" + random_index;
 
                 //Manage time range for access duration
-                //var today = new Date() ;
-                //console.log(today);
-                //var tomorrow = new Date();
-                //tomorrow.setDate(today.getDate() + 1);
-                //console.log(tomorrow);
+                 
                 var todayUTC = new Date();
                 console.log('todayUTC: ', todayUTC);
-                var utcOffset = todayUTC.getTimezoneOffset();
-                var cestOffset = utcOffset + 120;
+               
+ 
 
-                console.log('cestOffset: ', cestOffset);
-
-                var todayCESTtime = todayUTC.getTime() + (cestOffset * 60000);
-                console.log('todayCESTtime: ', todayCESTtime)
-                var todayCEST = new Date(todayCESTtime);
-                console.log('todayCEST: ', todayCEST)
-                var today = todayCEST.getDate() + "-" + (todayCEST.getMonth() + 1) + "-" + todayCEST.getFullYear() + " " +
-                    todayCEST.getHours() + ":" + todayCEST.getMinutes();
+                var todayUTCtime = todayUTC.getTime();
+                console.log('todayUTCtime: ', todayUTCtime)
+                
+                var today = todayUTC.getDate() + "-" + (todayUTC.getMonth() + 1) + "-" + todayUTC.getFullYear() + " " +
+                    todayUTC.getHours() + ":" + todayUTC.getMinutes();
                 console.log('today: ', today);
                 
-                var dateTimeNow = Date.now();
-                var dateNow= new Date(dateTimeNow);
-                var tod= dateNow.getDate() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getFullYear() + " " +
-                    dateNow.getHours() + ":" + dateNow.getMinutes();
-                console.log(tod);
-                
-                var dateTimeTomorrow=new Date();
-                dateTimeTomorrow.setDate(dateNow.getDate()+1);
-                var tom = dateTimeTomorrow.getDate() + "-" + (dateTimeTomorrow.getMonth() + 1) + "-" + dateTimeTomorrow.getFullYear() + " " +
-                    dateTimeTomorrow.getHours() + ":" + dateTimeTomorrow.getMinutes();
-                
-                var dateTom=new Date(dateTimeTomorrow.getTime());
-                var tom = dateTom.getDate() + "-" + (dateTom.getMonth() + 1) + "-" + dateTom.getFullYear() + " " +
-                    dateTom.getHours() + ":" + dateTom.getMinutes();
-                console.log(tom);
+                 
+              
                 
                 var tomorrowUTC = new Date();
                 tomorrowUTC.setDate(todayUTC.getDate() + 1);
-                var tomorrowCESTtime = tomorrowUTC.getTime() + (cestOffset * 60000);
-                var tomorrowCEST = new Date(tomorrowCESTtime);
-                var tomorrow = tomorrowCEST.getDate() + "-" + (tomorrowCEST.getMonth() + 1) + "-" + tomorrowCEST.getFullYear() + " " +
-                    tomorrowCEST.getHours() + ":" + tomorrowCEST.getMinutes();
+                var tomorrowUTCTime=tomorrowUTC.getTime();
+                var tomorrow = tomorrowUTC.getDate() + "-" + (tomorrowUTC.getMonth() + 1) + "-" + tomorrowUTC.getFullYear() + " " +
+                    tomorrowUTC.getHours() + ":" + tomorrowUTC.getMinutes();
                 console.log('tomorrow: ', tomorrow);
-
-                var tomorrow = tomorrowCEST.getDate() + "-" + (tomorrowCEST.getMonth() + 1) + "-" + tomorrowCEST.getFullYear() + " " +
-                    tomorrowCEST.getHours() + ":" + tomorrowCEST.getMinutes();
-                console.log('tomorrow: ', tomorrow);
+ 
 
                 JagoCalls.GETIdGuestTagByRoom(roomName.toLowerCase().trim(), function(err, data, text) {
                         var id = null;
@@ -100,7 +76,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                             // Office 301 Italtel => 3513 
                             // Digitaliani Cisco => 3471
                             //JagoCalls.POSTuser(user, user, 3513, today.getTime(), tomorrow.getTime(), function(err, data, text) {
-                            //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
+                            //JagoCalls.POSTuser(user, user, id, todayUTCTime, tomorrowUTCTime, function(err, data, text) {
                             
                             //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             JagoCalls.createReservation(user, user, id,  todayCESTtime , tomorrowCESTtime, function(err, data, text) {
