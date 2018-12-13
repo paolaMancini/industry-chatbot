@@ -85,7 +85,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                             //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             
                             //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
-                            JagoCalls.createReservation(user, user, id,  todayCETtime , tomorrowCETtime, function(err, data, text) {
+                            JagoCalls.createReservation(user, user, id,  todayUTC.getTime() , tomorrowUTC.getTime(), function(err, data, text) {
                             
                                     if (err) {
                                         bot.reply(message, "Jago system not reached! err: ", err);
