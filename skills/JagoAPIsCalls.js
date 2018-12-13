@@ -141,7 +141,7 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
           //  var currentLock = events.smartLock[i];
             publicLink = events.link;
             console.log('events.id: ', events.id);
-            console.log('events.smartLock.id: ', events.smartLock.id);
+            //console.log('events.smartLock.id: ', events.smartLock.id);
             console.log('events.link: ', events.link);
             //if (currentLock.id == uTagId ) {
                 var publicLink = events.link;
