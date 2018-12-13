@@ -46,8 +46,8 @@ module.exports = function(dialogflowMiddleware,controller) {
                 
                 var todayCET = new Date(todayCETtime);
                 console.log('todayCET: ', todayCET)
-                var today = todayCET.getDate() + "-" + (todayCET.getMonth() + 1) + "-" + todayCET.getFullYear() + " " +
-                    todayCET.getHours() + ":" + todayCET.getMinutes();
+                var today = addZero(todayCET.getDate()) + "-" + addZero((todayCET.getMonth() + 1)) + "-" + todayCET.getFullYear() + " " +
+                    addZero(todayCET.getHours()) + ":" + addZero(todayCET.getMinutes());
                 console.log('today: ', today);
                 
                   
@@ -113,4 +113,12 @@ module.exports = function(dialogflowMiddleware,controller) {
                 })
         }
     })
+    function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+    
 };
+
