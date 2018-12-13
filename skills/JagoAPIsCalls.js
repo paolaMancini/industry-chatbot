@@ -149,7 +149,7 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
                 console.log('@@@@@@@@@@@@@@@ publicLink= ',publicLink);
            // }
 
-        }
+        //}
 
 
         cb(null, events, publicLink);
