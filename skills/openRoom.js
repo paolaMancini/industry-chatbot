@@ -33,29 +33,35 @@ module.exports = function(dialogflowMiddleware,controller) {
                 var user = "u" + random_index;
 
                 //Manage time range for access duration
-                 
+                
                 var todayUTC = new Date();
                 console.log('todayUTC: ', todayUTC);
-               
- 
+                var utcOffset = todayUTC.getTimezoneOffset();
+                var cetOffset = utcOffset + 60;
 
-                var todayUTCtime = todayUTC.getTime();
-                console.log('todayUTCtime: ', todayUTCtime)
+                console.log('cetOffset: ', cetOffset);
+
+                var todayCETtime = todayUTC.getTime() + (cetOffset * 60000);
+                console.log('todayCETtime: ', todayCETtime)
                 
-                var today = todayUTC.getDate() + "-" + (todayUTC.getMonth() + 1) + "-" + todayUTC.getFullYear() + " " +
-                    todayUTC.getHours() + ":" + todayUTC.getMinutes();
+                var todayCET = new Date(todayCETtime);
+                console.log('todayCEST: ', todayCEST)
+                var today = todayCET.getDate() + "-" + (todayCET.getMonth() + 1) + "-" + todayCET.getFullYear() + " " +
+                    todayCET.getHours() + ":" + todayCET.getMinutes();
                 console.log('today: ', today);
                 
-                 
-              
-                
+                  
                 var tomorrowUTC = new Date();
                 tomorrowUTC.setDate(todayUTC.getDate() + 1);
-                var tomorrowUTCTime=tomorrowUTC.getTime();
-                var tomorrow = tomorrowUTC.getDate() + "-" + (tomorrowUTC.getMonth() + 1) + "-" + tomorrowUTC.getFullYear() + " " +
-                    tomorrowUTC.getHours() + ":" + tomorrowUTC.getMinutes();
+                var tomorrowCETtime = tomorrowUTC.getTime() + (cetOffset * 60000);
+                var tomorrowCET = new Date(tomorrowCETtime);
+                var tomorrow = tomorrowCET.getDate() + "-" + (tomorrowCET.getMonth() + 1) + "-" + tomorrowCET.getFullYear() + " " +
+                    tomorrowCET.getHours() + ":" + tomorrowCET.getMinutes();
                 console.log('tomorrow: ', tomorrow);
- 
+
+                var tomorrow = tomorrowCET.getDate() + "-" + (tomorrowCET.getMonth() + 1) + "-" + tomorrowCET.getFullYear() + " " +
+                    tomorrowCET.getHours() + ":" + tomorrowCEST.getMinutes();
+                console.log('tomorrow: ', tomorrow);
 
                 JagoCalls.GETIdGuestTagByRoom(roomName.toLowerCase().trim(), function(err, data, text) {
                         var id = null;
@@ -76,10 +82,10 @@ module.exports = function(dialogflowMiddleware,controller) {
                             // Office 301 Italtel => 3513 
                             // Digitaliani Cisco => 3471
                             //JagoCalls.POSTuser(user, user, 3513, today.getTime(), tomorrow.getTime(), function(err, data, text) {
-                            //JagoCalls.POSTuser(user, user, id, todayUTCTime, tomorrowUTCTime, function(err, data, text) {
+                            //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             
                             //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
-                            JagoCalls.createReservation(user, user, id,  todayCESTtime , tomorrowCESTtime, function(err, data, text) {
+                            JagoCalls.createReservation(user, user, id,  todayCETtime , tomorrowCETtime, function(err, data, text) {
                             
                                     if (err) {
                                         bot.reply(message, "Jago system not reached! err: ", err);
