@@ -129,7 +129,7 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
         console.log('###################');
     
 
-        var numRec = events.tags.length;
+        var numRec = events.smartLock.length;
 
         if (numRec == 0) {
             msg = "No data found";
@@ -138,12 +138,12 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
 
         var publicLink = null;
         for (var i = 0; i < numRec; i++) {
-            //var currentLock = events.smartLock[i];
+            var currentLock = events.smartLock[i];
             publicLink = events.link;
-            console.log('events.tags[i].id: ', events.tags[i].id);
-            console.log('events.tags[i].link: ', events.tags[i].link);
-            if (events.tags[i].id == uTagId && (events.tags[i].state == "VALID")) {
-                var publicLink = events.publicLink;
+            console.log('currentLock.id: ', currentLock.id);
+            console.log('events.link: ', events.link);
+            if (currentLock.id == uTagId ) {
+                var publicLink = events.link;
 
                 console.log('@@@@@@@@@@@@@@@ link=link');
             }
