@@ -129,11 +129,11 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
         console.log('###################');
     
 
-        var numRec = events.smartLock.length;
+        //var numRec = events.smartLock.length;
 
-        if (numRec == 0) {
-            msg = "No data found";
-        }
+        //if (numRec == 0) {
+          //  msg = "No data found";
+        //}
 
 
         var publicLink = null;
