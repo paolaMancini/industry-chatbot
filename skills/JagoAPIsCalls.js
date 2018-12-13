@@ -81,7 +81,7 @@ module.exports.POSTuser = function(username, fname, uTagId, fromTime, toTime, cb
 
 module.exports.createReservation = function(username, fname, uTagId, fromTime, toTime, cb) {
     var request = require("request");
-    console.log('POSTuser: ', username, ' uTagId: ', uTagId, ' fromTime: ', fromTime, ' toTime: ', toTime);
+    console.log('createReservation: ', username, ' uTagId: ', uTagId, ' fromTime: ', fromTime, ' toTime: ', toTime);
 
     var options = {
         method: "POST",
@@ -125,7 +125,7 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
         }
 
 
-        //console.log('events: ', events);
+        console.log('events: ', events);
         console.log('###################');
     
 
