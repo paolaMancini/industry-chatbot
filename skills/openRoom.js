@@ -45,7 +45,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                 console.log('todayCETtime: ', todayCETtime)
                 
                 var todayCET = new Date(todayCETtime);
-                console.log('todayCEST: ', todayCEST)
+                console.log('todayCET: ', todayCET)
                 var today = todayCET.getDate() + "-" + (todayCET.getMonth() + 1) + "-" + todayCET.getFullYear() + " " +
                     todayCET.getHours() + ":" + todayCET.getMinutes();
                 console.log('today: ', today);
@@ -60,7 +60,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                 console.log('tomorrow: ', tomorrow);
 
                 var tomorrow = tomorrowCET.getDate() + "-" + (tomorrowCET.getMonth() + 1) + "-" + tomorrowCET.getFullYear() + " " +
-                    tomorrowCET.getHours() + ":" + tomorrowCEST.getMinutes();
+                    tomorrowCET.getHours() + ":" + tomorrowCET.getMinutes();
                 console.log('tomorrow: ', tomorrow);
 
                 JagoCalls.GETIdGuestTagByRoom(roomName.toLowerCase().trim(), function(err, data, text) {
