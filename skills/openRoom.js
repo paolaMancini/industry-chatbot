@@ -59,8 +59,11 @@ module.exports = function(dialogflowMiddleware,controller) {
                     dateNow.getHours() + ":" + dateNow.getMinutes();
                 console.log(tod);
                 
-                var dateTimeTomorrow = dateNow.getDate() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getFullYear() + " " +
-                    dateNow.getHours() + ":" + dateNow.getMinutes();
+                var dateTimeTomorrow=new Date();
+                dateTimeTomorrow.setDate(dateNow.getDate()+1);
+                var tom = dateTimeTomorrow.getDate() + "-" + (dateTimeTomorrow.getMonth() + 1) + "-" + dateTimeTomorrow.getFullYear() + " " +
+                    dateTimeTomorrow.getHours() + ":" + dateTimeTomorrow.getMinutes();
+                
                 var dateTom=new Date(dateTimeTomorrow.getTime());
                 var tom = dateTom.getDate() + "-" + (dateTom.getMonth() + 1) + "-" + dateTom.getFullYear() + " " +
                     dateTom.getHours() + ":" + dateTom.getMinutes();
