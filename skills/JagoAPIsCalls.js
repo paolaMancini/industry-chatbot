@@ -275,7 +275,7 @@ module.exports.GETIdGuestTagByRoom = function( name,cb) {
            
           var nameNorm=current.name.toLowerCase();
        
-           if (  (nameNorm.includes(trim(name)) ) {
+           if  (nameNorm.includes(trim(name)) ) {
                msg=current.id;
                console.log("found id: ", current.id);
             }
