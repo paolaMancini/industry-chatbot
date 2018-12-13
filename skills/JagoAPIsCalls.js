@@ -79,7 +79,111 @@ module.exports.POSTuser = function(username, fname, uTagId, fromTime, toTime, cb
 
 };
 
+module.exports.createReservation = function(username, fname, uTagId, fromTime, toTime, cb) {
+    var request = require("request");
+    console.log('POSTuser: ', username, ' uTagId: ', uTagId, ' fromTime: ', fromTime, ' toTime: ', toTime);
+
+    var options = {
+        method: "POST",
+        url: "https://api.otello.cloud/api/v1/reservations",
+        headers: {
+
+            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiUk9MRV9NQU5BR0VSIiwidXNlcl9uYW1lIjoibWFuYWdlckBjaXNjby5jb20iLCJzY29wZSI6WyJvdGVsbG9fcmVhZCIsIm90ZWxsb193cml0ZSJdLCJ1c2VySWQiOjM2MjQsImF1dGhvcml0aWVzIjpbIlJPTEVfTUFOQUdFUiJdLCJqdGkiOiI1NTUxYzQ0Zi0yYmRmLTQyZGYtOTM4Zi01MmVjMTlhZDgyNTciLCJjbGllbnRfaWQiOiJhcHAifQ.P_hbCZrvmbGc9MKpOKU_XTbiaPrRIJ01R9ZwEcJrRQY",
+            "content-type": "application/json",
+            "accept": "application/json"
+        },
+        body: {
+          "dateInterval": {
+            "from":fromTime,
+            "to": toTime
+          },
+          "guestEmail": username,
+          "guestName": fname,
+          "guestPhone": "string",
+          "guestSurname": "buddy",
+          "notes": "Reservation for "+username,
+          "smartLockId": uTagId, 
+          "timeInterval": {
+            "from": 0,
+            "to": 86399
+          }
+        },
+        json: true
+    };
  
+   request(options, function(error, response, events) {
+        if (error) {
+            debug("1 could not retreive list of events, error: " + error);
+            cb(new Error("Could not retreive current events, sorry [Backend Events API not responding]"), null, null);
+            return;
+        }
+
+        if ((response < 200) || (response > 299)) {
+            debug("1 could not retreive list of events, response: " + response);
+
+            return;
+        }
+
+
+        //console.log('events: ', events);
+        console.log('###################');
+    
+
+        var numRec = events.tags.length;
+
+        if (numRec == 0) {
+            msg = "No data found";
+        }
+
+
+        var publicLink = null;
+        for (var i = 0; i < numRec; i++) {
+            //var currentLock = events.smartLock[i];
+            publicLink = events.link;
+            console.log('events.tags[i].id: ', events.tags[i].id);
+            console.log('events.tags[i].link: ', events.tags[i].link);
+            if (events.tags[i].id == uTagId && (events.tags[i].state == "VALID")) {
+                var publicLink = events.publicLink;
+
+                console.log('@@@@@@@@@@@@@@@ link=link');
+            }
+
+        }
+
+
+        cb(null, events, publicLink);
+    })
+
+};
+
+{
+    "id": 549,
+    "createdAt": 1544624894722,
+    "link": "https://jago.cloud/otelloguest/login/?p=t3sFc6LN",
+    "guestName": "Netwrapper",
+    "guestSurname": "Demo",
+    "guestEmail": "paola.mancini@italtel.com",
+    "guestPhone": "string",
+    "fromDate": 1544623200000,
+    "toDate": 1547128800000,
+    "timeInSecondsFrom": 0,
+    "timeInSecondsTo": 86399,
+    "deleted": false,
+    "smartLock": {
+        "id": 6,
+        "updatedAt": 1544622067000,
+        "name": "Office 301",
+        "serialNumber": "72256C3B8772",
+        "batteryLevel": 100,
+        "model": "IMArgoLib.Libra",
+        "deleted": false,
+        "timeZone": "Europe/Rome",
+        "powerSourceType": "BATTERY"
+    },
+    "lockGroup": null,
+    "notes": "Reservation valida per CLEUR19 e MWC19"
+}
+
 
 module.exports.GETsmartLocks = function( cb) {
     var request = require("request");
