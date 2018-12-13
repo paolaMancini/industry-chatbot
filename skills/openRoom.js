@@ -52,6 +52,15 @@ module.exports = function(dialogflowMiddleware,controller) {
                 var today = todayCEST.getDate() + "-" + (todayCEST.getMonth() + 1) + "-" + todayCEST.getFullYear() + " " +
                     todayCEST.getHours() + ":" + todayCEST.getMinutes();
                 console.log('today: ', today);
+                
+                var dateTimeNow = Date.now();
+                var tod= dateTimeNow.getDate() + "-" + (dateTimeNow.getMonth() + 1) + "-" + dateTimeNow.getFullYear() + " " +
+                    dateTimeNow.getHours() + ":" + dateTimeNow.getMinutes();
+                console.log(dateTimeNow);
+                var dateTimeTomorrow = dateTimeNow.getDate() + "-" + (dateTimeNow.getMonth() + 1) + "-" + dateTimeNow.getFullYear() + " " +
+                    dateTimeNow.getHours() + ":" + dateTimeNow.getMinutes();
+                var tom = dateTimeTomorrow.getDate() + "-" + (dateTimeTomorrow.getMonth() + 1) + "-" + dateTimeTomorrow.getFullYear() + " " +
+                    dateTimeTomorrow.getHours() + ":" + dateTimeTomorrow.getMinutes();
 
                 var tomorrowUTC = new Date();
                 tomorrowUTC.setDate(todayUTC.getDate() + 1);
@@ -85,7 +94,10 @@ module.exports = function(dialogflowMiddleware,controller) {
                             // Digitaliani Cisco => 3471
                             //JagoCalls.POSTuser(user, user, 3513, today.getTime(), tomorrow.getTime(), function(err, data, text) {
                             //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
-                            JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
+                            
+                            //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
+                            JagoCalls.createReservation(user, user, id, dateTimeNow, dateTimeNowTomorrow, function(err, data, text) {
+                            
                                     if (err) {
                                         bot.reply(message, "Jago system not reached! err: ", err);
                                         return;
@@ -99,8 +111,11 @@ module.exports = function(dialogflowMiddleware,controller) {
                                     publicLink = data.link;
                                     console.log("publicLink: ", publicLink);
 
+                                    //var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
+                                    //msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
+                                    //bot.reply(message, msg);
                                     var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
-                                    msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
+                                    msg += "<br><br>**Remember**: Access Url is valid from: " + tod + " to: " + tom; 
                                     bot.reply(message, msg);
 
                             });
