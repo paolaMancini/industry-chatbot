@@ -54,7 +54,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                 console.log('today: ', today);
                 
                 var dateTimeNow = Date.now();
-                var dateNow= new Date(dateTimeNow.getTime());
+                var dateNow= new Date(dateTimeNow);
                 var tod= dateNow.getDate() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getFullYear() + " " +
                     dateNow.getHours() + ":" + dateNow.getMinutes();
                 console.log(tod);
