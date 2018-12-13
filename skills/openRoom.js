@@ -97,7 +97,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                                     }
 
                                     publicLink = data.link;
-                                    console.log("publcLink: ", link);
+                                    console.log("publcLink: ", publcLink);
 
                                     var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
                                     msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
