@@ -54,14 +54,18 @@ module.exports = function(dialogflowMiddleware,controller) {
                 console.log('today: ', today);
                 
                 var dateTimeNow = Date.now();
-                var tod= dateTimeNow.getDate() + "-" + (dateTimeNow.getMonth() + 1) + "-" + dateTimeNow.getFullYear() + " " +
-                    dateTimeNow.getHours() + ":" + dateTimeNow.getMinutes();
-                console.log(dateTimeNow);
+                var dateNow= new Date(dateTimeNow.getTime());
+                var tod= dateNow.getDate() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getFullYear() + " " +
+                    dateNow.getHours() + ":" + dateNow.getMinutes();
+                console.log(tod);
+                
                 var dateTimeTomorrow = dateTimeNow.getDate() + "-" + (dateTimeNow.getMonth() + 1) + "-" + dateTimeNow.getFullYear() + " " +
                     dateTimeNow.getHours() + ":" + dateTimeNow.getMinutes();
-                var tom = dateTimeTomorrow.getDate() + "-" + (dateTimeTomorrow.getMonth() + 1) + "-" + dateTimeTomorrow.getFullYear() + " " +
-                    dateTimeTomorrow.getHours() + ":" + dateTimeTomorrow.getMinutes();
-
+                var dateTom=new Date(dateTimeTomorrow.getTime());
+                var tom = dateTom.getDate() + "-" + (dateTom.getMonth() + 1) + "-" + dateTom.getFullYear() + " " +
+                    dateTom.getHours() + ":" + dateTom.getMinutes();
+                console.log(tom);
+                
                 var tomorrowUTC = new Date();
                 tomorrowUTC.setDate(todayUTC.getDate() + 1);
                 var tomorrowCESTtime = tomorrowUTC.getTime() + (cestOffset * 60000);
