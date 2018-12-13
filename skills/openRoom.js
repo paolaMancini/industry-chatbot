@@ -84,7 +84,8 @@ module.exports = function(dialogflowMiddleware,controller) {
                             // Office 301 Italtel => 3513 
                             // Digitaliani Cisco => 3471
                             //JagoCalls.POSTuser(user, user, 3513, today.getTime(), tomorrow.getTime(), function(err, data, text) {
-                            JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
+                            //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
+                            JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                                     if (err) {
                                         bot.reply(message, "Jago system not reached! err: ", err);
                                         return;
@@ -95,8 +96,8 @@ module.exports = function(dialogflowMiddleware,controller) {
                                         return;
                                     }
 
-                                    publicLink = data.publicLink;
-                                    console.log("publcLink: ", publicLink);
+                                    publicLink = data.link;
+                                    console.log("publcLink: ", link);
 
                                     var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
                                     msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
