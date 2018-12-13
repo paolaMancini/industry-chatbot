@@ -103,7 +103,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                             //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             
                             //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
-                            JagoCalls.createReservation(user, user, id, dateNow, dateTom, function(err, data, text) {
+                            JagoCalls.createReservation(user, user, id,  Math.floor(dateNow / 1000),Math.floor(dateTom / 1000), function(err, data, text) {
                             
                                     if (err) {
                                         bot.reply(message, "Jago system not reached! err: ", err);
@@ -115,7 +115,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                                         return;
                                     }
 
-                                    publicLink = data.link;
+                                    var publicLink = data.link;
                                     console.log("publicLink: ", publicLink);
 
                                     //var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
