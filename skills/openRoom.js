@@ -100,12 +100,10 @@ module.exports = function(dialogflowMiddleware,controller) {
                                     var publicLink = data.link;
                                     console.log("publicLink: ", publicLink);
 
-                                    //var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
-                                    //msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
-                                    //bot.reply(message, msg);
                                     var msg = "Activate bluetooth and Click on " + publicLink + "  from your Otello App to access the room.";
-                                    msg += "<br><br>**Remember**: Access Url is valid from: " + tod + " to: " + tom; 
+                                    msg += "<br><br>**Remember**: Access Url is valid from: " + today + " to: " + tomorrow; 
                                     bot.reply(message, msg);
+                                     
 
                             });
                     } else {
