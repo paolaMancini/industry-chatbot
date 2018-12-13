@@ -156,33 +156,6 @@ module.exports.createReservation = function(username, fname, uTagId, fromTime, t
 
 };
 
-{
-    "id": 549,
-    "createdAt": 1544624894722,
-    "link": "https://jago.cloud/otelloguest/login/?p=t3sFc6LN",
-    "guestName": "Netwrapper",
-    "guestSurname": "Demo",
-    "guestEmail": "paola.mancini@italtel.com",
-    "guestPhone": "string",
-    "fromDate": 1544623200000,
-    "toDate": 1547128800000,
-    "timeInSecondsFrom": 0,
-    "timeInSecondsTo": 86399,
-    "deleted": false,
-    "smartLock": {
-        "id": 6,
-        "updatedAt": 1544622067000,
-        "name": "Office 301",
-        "serialNumber": "72256C3B8772",
-        "batteryLevel": 100,
-        "model": "IMArgoLib.Libra",
-        "deleted": false,
-        "timeZone": "Europe/Rome",
-        "powerSourceType": "BATTERY"
-    },
-    "lockGroup": null,
-    "notes": "Reservation valida per CLEUR19 e MWC19"
-}
 
 
 module.exports.GETsmartLocks = function( cb) {
@@ -191,7 +164,7 @@ module.exports.GETsmartLocks = function( cb) {
   
     var options = {
         method: 'GET',
-        url: "https://api-cisco-otello-mi.jago.cloud/api/v1.1/smartLocks/",
+        url: "https://api.otello.cloud/api/v1/smartlocks",
         headers: {
             "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiUk9MRV9NQU5BR0VSIiwidXNlcl9uYW1lIjoibWFuYWdlckBjaXNjby5jb20iLCJzY29wZSI6WyJvdGVsbG9fcmVhZCIsIm90ZWxsb193cml0ZSJdLCJ1c2VySWQiOjM2MjQsImF1dGhvcml0aWVzIjpbIlJPTEVfTUFOQUdFUiJdLCJqdGkiOiI1NTUxYzQ0Zi0yYmRmLTQyZGYtOTM4Zi01MmVjMTlhZDgyNTciLCJjbGllbnRfaWQiOiJhcHAifQ.P_hbCZrvmbGc9MKpOKU_XTbiaPrRIJ01R9ZwEcJrRQY",
             "accept": "application/json"
@@ -216,15 +189,15 @@ module.exports.GETsmartLocks = function( cb) {
  
       var events = JSON.parse(body);
       checkJSON(events);
-       if (events.data.length == 0) {
+       if (events.totalElements == 0) {
              cb(null, events, "**Found no event currently going on.**");
              return;
         }
-        console.log("fetched " + events.data.length + " events");
+        console.log("fetched " + events.totalElements + " events");
         checkJSON(events);
  
        // console.log("events: ",events);
-        var nb = events.data.length;
+        var nb = events.totalElements;
          
         var msg="<br>";
         if (nb == 1) {
@@ -233,10 +206,10 @@ module.exports.GETsmartLocks = function( cb) {
      
         msg = "Rooms available:";
         for (var i = 0; i < nb; i++) {         
-            var current = events.data[i];
+            var current = events.content[i];
             console.log('current.name: ', current.name);
-            console.log('current.model: ', current.model);
-            msg += "<br>ROOM Name: **" + current.name + "** - LOCK model: **" + current.model+ "** - Vendor: **" + current.vendor+ "** - Serial Number: **" + current.serialNumber+"**<br>";
+            console.log('current.serialNumber: ', current.serialNumber);
+            msg += "<br>ROOM Name: **" + current.name + "** - LOCK model: **" + current.serialNumber"**<br>";
         }
         console.log('msg: ',msg);
         cb(null, events, msg);
@@ -246,7 +219,7 @@ module.exports.GETsmartLocks = function( cb) {
 
 
 module.exports.GETIdGuestTagByRoom = function( name,cb) {
- // se roomName=digitaliani, ricercodigitaliani nel type e restituisco l'id
+ // se roomName=digitaliani, ricerco digitaliani nel type e restituisco l'id
   
     console.log("GETIdGuestTagByRoom (",name,")");
  
@@ -255,7 +228,7 @@ module.exports.GETIdGuestTagByRoom = function( name,cb) {
   
     var options = {
         method: 'GET',
-        url: "https://api-cisco-otello-mi.jago.cloud/api/v1.1/guestTags",
+        url: "https://api.otello.cloud/api/v1/smartlocks",
         headers: {
             "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiUk9MRV9NQU5BR0VSIiwidXNlcl9uYW1lIjoibWFuYWdlckBjaXNjby5jb20iLCJzY29wZSI6WyJvdGVsbG9fcmVhZCIsIm90ZWxsb193cml0ZSJdLCJ1c2VySWQiOjM2MjQsImF1dGhvcml0aWVzIjpbIlJPTEVfTUFOQUdFUiJdLCJqdGkiOiI1NTUxYzQ0Zi0yYmRmLTQyZGYtOTM4Zi01MmVjMTlhZDgyNTciLCJjbGllbnRfaWQiOiJhcHAifQ.P_hbCZrvmbGc9MKpOKU_XTbiaPrRIJ01R9ZwEcJrRQY",
             "accept": "application/json"
@@ -274,37 +247,36 @@ module.exports.GETIdGuestTagByRoom = function( name,cb) {
             //sparkCallback(new Error("Could not retreive current events, sorry [bad anwser from Events API]"), null, null);
             return;
         }
-     
+
      
         
  
-      var events = JSON.parse(body);
+     var events = JSON.parse(body);
       checkJSON(events);
-       if (events.data.length == 0) {
+       if (events.totalElements == 0) {
              cb(null, events, "**Found no event currently going on.**");
              return;
         }
-        console.log("fetched " + events.data.length + " events");
+        console.log("fetched " + events.totalElements + " events");
+        checkJSON(events);
  
        // console.log("events: ",events);
-        var nb = events.data.length;
+        var nb = events.totalElements;
          
-        var msg=null;
+        var msg="<br>";
         if (nb == 1) {
             msg = "No values found";
         }
-  
+    
       
-        for (var i = 0; i < nb; i++) {         
-            var current = events.data[i];
-           
-            console.log("found type: ", current.type);
-            console.log('current: ',current);
+      for (var i = 0; i < nb; i++) {         
+          var current = events.content[i];
+          console.log('current: ',current);
            
           var nameNorm=current.name.toLowerCase();
-          var typeNorm=current.type.toLowerCase()
-           if ((typeNorm.includes(trim(name))) || (nameNorm.includes(trim(name)))) {
-                msg=current.id;
+       
+           if (  (nameNorm.includes(trim(name)) ) {
+               msg=current.id;
                console.log("found id: ", current.id);
             }
             
