@@ -6,6 +6,7 @@ module.exports = function( dialogflowMiddleware,controller) {
     ) {
         console.log('MESSAGE:', message);
         console.log('fulfillment:', message.fulfillment.speech);
+         console.log('CLAVIGERO-Github-Version3:', message);
         bot.reply(message, message.fulfillment.speech);
     });
 }
