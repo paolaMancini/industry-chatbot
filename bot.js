@@ -22,7 +22,7 @@ if (!process.env.JAGO_TOKEN) {
     console.log("Could not start as Jago APIs require a JAGO OAuth2 access token.");
     console.log("Please add env variable JAGO (with Bearer on the command line or to the .env file");
     console.log("Example: ");
-    console.log("> SPARK_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY JAGO_URL=YYYYYYYYYYYYY DIALOGFLOW_TOKEN_TOKEN=YYYYYYYYYYYYY node bot.js ");
+    console.log("> SPARK_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY JAGO_URL=YYYYYYYYYYYYY DIALOGFLOW_TOKEN=YYYYYYYYYYYYY JAGO_TOKEN=ZZZZZZZZZZZZZZZZZZZZZ node bot.js ");
     process.exit(1);
 }
 
@@ -57,6 +57,15 @@ if (!dialogflow) {
     console.log("> SPARK_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY JAGO_URL=YYYYYYYYYYYYY DIALOGFLOW_TOKEN_TOKEN=YYYYYYYYYYYYY node bot.js ");
     process.exit(1);
 }
+var jagoToken = process.env.JAGO_TOKEN;
+if (!jagoToken) {
+
+    console.log("Please add env variable JAGO_TOKEN on the command line or to the .env file");
+    console.log("Example: ");
+    console.log("> SPARK_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY JAGO_URL=YYYYYYYYYYYYY DIALOGFLOW_TOKEN_TOKEN=YYYYYYYYYYYYY node bot.js ");
+    process.exit(1);
+}
+
 var options = {
     token: dialogflow
 };
