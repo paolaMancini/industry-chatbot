@@ -2,23 +2,17 @@ var JagoCalls = require("./JagoAPIsCalls");
 
 module.exports = function(dialogflowMiddleware,controller) {
 
-    //controller.hears(['open digitaliani|open Office 301'], 'direct_message,direct_mention', function(bot, message) {
+    
     controller.hears(['openRoom'], 'direct_message,direct_mention', dialogflowMiddleware.hears,function(bot, message) {
             console.log('message: ', message);
-
-           // console.log(message.match[0]);
-           // console.log(message.match[1]);
-            //var roomName = "digitaliani";
-            //var roomName = message.match[1];
-            
-            //var roomName=message.parameters.lockName;
+ 
             var roomName=message.entities.lockName;
             var italtelRoom = "Office 301";
             var ciscoRoom = "Digitaliani";
 
             if ((roomName.toLowerCase().trim() != (ciscoRoom.toLowerCase()).trim()) && (roomName.toLowerCase().trim() != (italtelRoom.toLowerCase()).trim())) {
                 if ((roomName == null) || (roomName === "") ){
-                    //bot.reply(message, "room name not specified");
+                   
                     bot.reply(message, message.fulfillment.speech);
                 }else{
                     bot.reply(message, "Room " + roomName + " not available");
@@ -79,12 +73,7 @@ module.exports = function(dialogflowMiddleware,controller) {
                         if (id != null) {
                             console.log("id: ", id);
 
-                            // Office 301 Italtel => 3513 
-                            // Digitaliani Cisco => 3471
-                            //JagoCalls.POSTuser(user, user, 3513, today.getTime(), tomorrow.getTime(), function(err, data, text) {
-                            //JagoCalls.POSTuser(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             
-                            //JagoCalls.createReservation(user, user, id, todayCESTtime, tomorrowCESTtime, function(err, data, text) {
                             JagoCalls.createReservation(user, user, id,  todayUTC.getTime() , tomorrowUTC.getTime(), function(err, data, text) {
                             
                                     if (err) {
