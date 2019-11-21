@@ -31,7 +31,10 @@ module.exports = function(dialogflowMiddleware,controller) {
                 var todayUTC = new Date();
                 console.log('todayUTC: ', todayUTC);
                 var utcOffset = todayUTC.getTimezoneOffset();
-                var cetOffset = utcOffset + 120;
+                // da Ottobre a Marzo +60 
+                var cetOffset = utcOffset + 60;
+                // da Marzo a Ottobre +120
+                //var cetOffset = utcOffset + 120;
 
                 console.log('cetOffset: ', cetOffset);
 
